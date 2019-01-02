@@ -3,15 +3,15 @@ package com.stefanini.genericElements.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
-public class Pedido extends Elementos implements Serializable {
+public class Pedido extends Entidades implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -20,10 +20,10 @@ public class Pedido extends Elementos implements Serializable {
     private Date dataPedido;
 
     @OneToMany(mappedBy = "id.pedido")
-    private Set<ItemPedido> itens = new HashSet<>();
+    private List<ItemPedido> itens = new ArrayList<>();
 
 
-    public Pedido(Date dataPedido, Set<ItemPedido> itens) {
+    public Pedido(Date dataPedido, List<ItemPedido> itens) {
         super();
         this.dataPedido = dataPedido;
         this.itens = itens;
@@ -37,7 +37,7 @@ public class Pedido extends Elementos implements Serializable {
         return dataPedido;
     }
 
-    public Set<ItemPedido> getItens() {
+    public List<ItemPedido> getItens() {
         return itens;
     }
 
@@ -49,7 +49,7 @@ public class Pedido extends Elementos implements Serializable {
         this.dataPedido = dataPedido;
     }
 
-    public void setItens(Set<ItemPedido> itens) {
+    public void setItens(List<ItemPedido> itens) {
         this.itens = itens;
     }
 

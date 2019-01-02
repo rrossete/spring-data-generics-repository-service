@@ -14,13 +14,13 @@ public class ItemPedido implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
-    private ItemPedidoPK id = new ItemPedidoPK();
+    private ItemPedidoPK id;
 
     private Double desconto;
     private Integer quantidade;
     private Double preco;
 
-    public ItemPedido(Pedido pedido, Produto produto, Double desconto, Integer quantidade, Double preco) {
+    public ItemPedido(Integer pedido, Integer produto, Double desconto, Integer quantidade, Double preco) {
         id.setPedido(pedido);
         id.setProduto(produto);
         this.desconto = desconto;
@@ -29,11 +29,11 @@ public class ItemPedido implements Serializable {
     }
 
     @JsonIgnore
-    public Pedido getPedido() {
+    public Integer getPedido() {
         return id.getPedido();
     }
 
-    public Produto getProduto() {
+    public Integer getProduto() {
         return id.getProduto();
     }
 

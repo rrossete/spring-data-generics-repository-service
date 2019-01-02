@@ -2,17 +2,17 @@ package com.stefanini.genericElements.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Produto extends Elementos implements Serializable {
+public class Produto extends Entidades implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
 
     private String nomeProduto;
     private Double precoProduto;
