@@ -11,9 +11,9 @@ import java.io.Serializable;
 import java.util.*;
 
 @Entity
-public class Pedido extends Entidades implements Serializable {
+public class Pedido extends Entidades{
 
-    private static final long serialVersionUID = 1L;
+    
 
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
@@ -56,16 +56,5 @@ public class Pedido extends Entidades implements Serializable {
     public Pedido() {
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pedido pedido = (Pedido) o;
-        return Objects.equals(id, pedido.id);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

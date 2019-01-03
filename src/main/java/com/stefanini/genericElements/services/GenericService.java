@@ -7,26 +7,37 @@ import com.stefanini.genericElements.repositories.GenericRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class GenericService<T extends Entidades> {
 
-    @Autowired
-    private GenericRepository<T> genericRepository;
+public class GenericService<T extends Entidades, I extends Serializable> {
 
+    private GenericRepository<T, I> genericRepository;
+    
+    
+    public GenericService(GenericRepository genericRepository) {
+		super();
+		this.genericRepository = genericRepository;
+	}
 
-    public List<Produto> findAllProdutos() {
+	public List<T> findAllProdutos() {
 
-        return genericRepository.findAllProdutos();
+        return genericRepository.findAll();
+    }
+    
+    public List<T> findAll() {
+
+        return genericRepository.findAll();
+    }
+    
+
+    public List<T> findAllPedidos() {
+        return genericRepository.findAll();
     }
 
-    public List<Pedido> findAllPedidos() {
-        return genericRepository.findAllPedidos();
-    }
-
-    public T findById(Integer id) {
+    public T findById(I id) {
 
         System.out.println(GenericService.class);
         Optional<T> elemento = genericRepository.findById(id);
@@ -39,7 +50,7 @@ public class GenericService<T extends Entidades> {
         genericRepository.saveAndFlush(entidade);
     }
 
-    public void delete(Integer id) {
+    public void delete(I id) {
 
         genericRepository.deleteById(id);
     }

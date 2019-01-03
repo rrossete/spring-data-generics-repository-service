@@ -11,53 +11,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/pedidos")
-public class PedidoSource {
+public class PedidoSource extends GenericResource<Pedido,Integer>{
+
+	@Autowired
+	public PedidoSource(PedidoService<Pedido, Integer> genericService) {
+		super(genericService);
+		// TODO Auto-generated constructor stub
+	}
 
 
-    @Autowired
-    GenericService<Pedido> genericService;
-
-    @Autowired
-    PedidoService pedidoService;
-
-    @GetMapping
-    public ResponseEntity<List<Pedido>> findAll() {
-        List<Pedido> listaPedidos = genericService.findAllPedidos();
-
-        return ResponseEntity.ok().body(listaPedidos);
-    }
-
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Pedido> findById(@PathVariable Integer id) {
-
-        Pedido pedido = genericService.findById(id);
-        System.out.println(pedido.toString());
-        return ResponseEntity.ok().body(pedido);
-    }
-
-    @PostMapping
-    public ResponseEntity<Void> create(@RequestBody Pedido pedido) {
-
-       pedidoService.createPedido(pedido);
-        return ResponseEntity.ok().build();
-
-    }
-
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@PathVariable Integer id, @RequestBody Pedido pedido) {
-
-        genericService.update(id, pedido);
-
-        return ResponseEntity.ok().build();
-    }
-
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
-
-        pedidoService.deletePedido(id);
-
-        return ResponseEntity.ok().build();
-    }
 
 
 }

@@ -1,17 +1,46 @@
 package com.stefanini.genericElements.models;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)// somente as classes concretas serao criadas
-public abstract class Entidades {
+public abstract class Entidades implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     protected Integer id;
 
-    public Entidades() {
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Entidades other = (Entidades) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	public Entidades() {
     }
 
     public abstract Integer getId();

@@ -5,20 +5,18 @@ import com.stefanini.genericElements.models.Pedido;
 import com.stefanini.genericElements.models.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
 
-@Repository
-public interface GenericRepository<T extends Entidades> extends JpaRepository<T, Integer> {
 
-    @Query(value = "SELECT * FROM produto", nativeQuery = true)
-    public List<Produto> findAllProdutos();
+public interface GenericRepository<T extends Entidades ,I extends Serializable> extends JpaRepository<T, I> {
 
-    @Query(value = "SELECT * FROM pedido", nativeQuery = true)
-    public List<Pedido> findAllPedidos();
+    public List<T> findAll();
 
-    Optional<T> findById(Integer id);
+    Optional<T> findById(I id);
 }
